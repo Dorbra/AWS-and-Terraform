@@ -105,6 +105,7 @@ resource "aws_instance" "nginx" {
     Purpose = "grandpa"
     Owner   = "doron.brand"
   }
+
   connection {
     type        = "ssh"
     host        = self.public_ip
@@ -113,10 +114,8 @@ resource "aws_instance" "nginx" {
 
   }
 
-
   provisioner "file" {
-    source = "./index.html"
-    #destination = "/tmp/share/nginx/html/"
+    source      = "./index.html"
     destination = "/var/tmp/index.html"
 
     connection {
