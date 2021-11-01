@@ -1,13 +1,17 @@
+data "aws_availability_zones" "available" {
+  state = "available"
+}
+
 resource "aws_subnet" "pub_1" {
   vpc_id     = aws_vpc.main.id
   cidr_block = "192.168.1.0/24"
   # REGION us-east AZ 1a
-  availability_zone = "us-east-1a"
+  availability_zone = data.aws_availability_zones.available.names[0]
 
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "whiskey-pub1-us-east-1a"
+    Name = "${whiskey-pub1-us-east-1.name[0]}"
 
   }
 }
